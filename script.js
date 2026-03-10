@@ -257,3 +257,33 @@ loader.id = 'page-loader';
 loader.innerHTML = `<div class="loader-ring"></div><div class="loader-text">Loading...</div>`;
 document.body.prepend(loader);
 
+
+/* ── Hamburger Menu ── */
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+const navOverlay = document.getElementById('nav-overlay');
+
+function closeMenu() {
+  hamburger.classList.remove('open');
+  navLinks.classList.remove('open');
+  navOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    navOverlay.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMenu);
+}
+
+// Close menu when a nav link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
